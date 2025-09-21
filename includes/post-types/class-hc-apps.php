@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HC Apps Custom Post Type
  *
@@ -20,6 +21,12 @@ class HC_Apps_Post_Type
      * Post type slug
      */
     const POST_TYPE = 'hc-apps';
+
+    /**
+     * Post type name
+     */
+    const POST_TYPE_NAME = 'HoytCreative App';
+    const POST_TYPE_NAME_PLURAL = 'HoytCreative Apps';
 
     /**
      * Taxonomy slug for app categories
@@ -50,30 +57,30 @@ class HC_Apps_Post_Type
     public function register_post_type()
     {
         $labels = [
-            'name'                  => _x('HC Apps', 'Post type general name', 'hoytcreative-apps'),
-            'singular_name'         => _x('HC App', 'Post type singular name', 'hoytcreative-apps'),
-            'menu_name'             => _x('HC Apps', 'Admin Menu text', 'hoytcreative-apps'),
-            'name_admin_bar'        => _x('HC App', 'Add New on Toolbar', 'hoytcreative-apps'),
+            'name'                  => _x(self::POST_TYPE_NAME_PLURAL, 'Post type general name', 'hoytcreative-apps'),
+            'singular_name'         => _x(self::POST_TYPE_NAME, 'Post type singular name', 'hoytcreative-apps'),
+            'menu_name'             => _x(self::POST_TYPE_NAME_PLURAL, 'Admin Menu text', 'hoytcreative-apps'),
+            'name_admin_bar'        => _x(self::POST_TYPE_NAME, 'Add New on Toolbar', 'hoytcreative-apps'),
             'add_new'               => __('Add New', 'hoytcreative-apps'),
-            'add_new_item'          => __('Add New HC App', 'hoytcreative-apps'),
-            'new_item'              => __('New HC App', 'hoytcreative-apps'),
-            'edit_item'             => __('Edit HC App', 'hoytcreative-apps'),
-            'view_item'             => __('View HC App', 'hoytcreative-apps'),
-            'all_items'             => __('All HC Apps', 'hoytcreative-apps'),
-            'search_items'          => __('Search HC Apps', 'hoytcreative-apps'),
-            'parent_item_colon'     => __('Parent HC Apps:', 'hoytcreative-apps'),
-            'not_found'             => __('No HC apps found.', 'hoytcreative-apps'),
-            'not_found_in_trash'    => __('No HC apps found in Trash.', 'hoytcreative-apps'),
-            'featured_image'        => _x('HC App Cover Image', 'Overrides the "Featured Image" phrase', 'hoytcreative-apps'),
+            'add_new_item'          => sprintf(__('Add New %s', 'hoytcreative-apps'), self::POST_TYPE_NAME),
+            'new_item'              => sprintf(__('New %s', 'hoytcreative-apps'), self::POST_TYPE_NAME),
+            'edit_item'             => sprintf(__('Edit %s', 'hoytcreative-apps'), self::POST_TYPE_NAME),
+            'view_item'             => sprintf(__('View %s', 'hoytcreative-apps'), self::POST_TYPE_NAME),
+            'all_items'             => sprintf(__('All %s', 'hoytcreative-apps'), self::POST_TYPE_NAME_PLURAL),
+            'search_items'          => sprintf(__('Search %s', 'hoytcreative-apps'), self::POST_TYPE_NAME_PLURAL),
+            'parent_item_colon'     => sprintf(__('Parent %s:', 'hoytcreative-apps'), self::POST_TYPE_NAME_PLURAL),
+            'not_found'             => sprintf(__('No %s found.', 'hoytcreative-apps'), strtolower(self::POST_TYPE_NAME_PLURAL)),
+            'not_found_in_trash'    => sprintf(__('No %s found in Trash.', 'hoytcreative-apps'), strtolower(self::POST_TYPE_NAME_PLURAL)),
+            'featured_image'        => sprintf(_x('%s Cover Image', 'Overrides the "Featured Image" phrase', 'hoytcreative-apps'), self::POST_TYPE_NAME),
             'set_featured_image'    => _x('Set cover image', 'Overrides the "Set featured image" phrase', 'hoytcreative-apps'),
             'remove_featured_image' => _x('Remove cover image', 'Overrides the "Remove featured image" phrase', 'hoytcreative-apps'),
             'use_featured_image'    => _x('Use as cover image', 'Overrides the "Use as featured image" phrase', 'hoytcreative-apps'),
-            'archives'              => _x('HC App archives', 'The post type archive label', 'hoytcreative-apps'),
-            'insert_into_item'      => _x('Insert into HC app', 'Overrides the "Insert into post" phrase', 'hoytcreative-apps'),
-            'uploaded_to_this_item' => _x('Uploaded to this HC app', 'Overrides the "Uploaded to this post" phrase', 'hoytcreative-apps'),
-            'filter_items_list'     => _x('Filter HC apps list', 'Screen reader text for the filter links', 'hoytcreative-apps'),
-            'items_list_navigation' => _x('HC apps list navigation', 'Screen reader text for the pagination', 'hoytcreative-apps'),
-            'items_list'            => _x('HC apps list', 'Screen reader text for the items list', 'hoytcreative-apps'),
+            'archives'              => sprintf(_x('%s archives', 'The post type archive label', 'hoytcreative-apps'), self::POST_TYPE_NAME),
+            'insert_into_item'      => sprintf(_x('Insert into %s', 'Overrides the "Insert into post" phrase', 'hoytcreative-apps'), strtolower(self::POST_TYPE_NAME)),
+            'uploaded_to_this_item' => sprintf(_x('Uploaded to this %s', 'Overrides the "Uploaded to this post" phrase', 'hoytcreative-apps'), strtolower(self::POST_TYPE_NAME)),
+            'filter_items_list'     => sprintf(_x('Filter %s list', 'Screen reader text for the filter links', 'hoytcreative-apps'), strtolower(self::POST_TYPE_NAME_PLURAL)),
+            'items_list_navigation' => sprintf(_x('%s list navigation', 'Screen reader text for the pagination', 'hoytcreative-apps'), self::POST_TYPE_NAME_PLURAL),
+            'items_list'            => sprintf(_x('%s list', 'Screen reader text for the items list', 'hoytcreative-apps'), self::POST_TYPE_NAME_PLURAL),
         ];
 
         $args = [
@@ -194,7 +201,7 @@ class HC_Apps_Post_Type
         $status = get_post_meta($post->ID, '_hc_app_status', true);
         $featured = get_post_meta($post->ID, '_hc_app_featured', true);
 
-        ?>
+?>
         <table class="form-table">
             <tr>
                 <th scope="row">
@@ -254,7 +261,7 @@ class HC_Apps_Post_Type
                 </td>
             </tr>
         </table>
-        <?php
+    <?php
     }
 
     /**
@@ -269,7 +276,7 @@ class HC_Apps_Post_Type
         $github_url = get_post_meta($post->ID, '_hc_app_github_url', true);
         $docs_url = get_post_meta($post->ID, '_hc_app_docs_url', true);
 
-        ?>
+    ?>
         <p>
             <label for="hc_app_demo_url"><strong><?php _e('Demo URL', 'hoytcreative-apps'); ?></strong></label><br>
             <input type="url" id="hc_app_demo_url" name="hc_app_demo_url" value="<?php echo esc_url($demo_url); ?>" class="widefat" />
@@ -286,7 +293,7 @@ class HC_Apps_Post_Type
             <label for="hc_app_docs_url"><strong><?php _e('Documentation URL', 'hoytcreative-apps'); ?></strong></label><br>
             <input type="url" id="hc_app_docs_url" name="hc_app_docs_url" value="<?php echo esc_url($docs_url); ?>" class="widefat" />
         </p>
-        <?php
+<?php
     }
 
     /**
