@@ -35,6 +35,19 @@ class HoytCreativeApps
     public function __construct()
     {
         add_action('init', [$this, 'init']);
+        add_action('plugins_loaded', [$this, 'load_textdomain']);
+        
+        // Include required files
+        $this->include_files();
+    }
+
+    /**
+     * Include required files
+     */
+    private function include_files()
+    {
+        require_once HOYTCREATIVE_APPS_PLUGIN_DIR . 'includes/class-hc-apps-helper.php';
+        require_once HOYTCREATIVE_APPS_PLUGIN_DIR . 'includes/post-types/class-hc-apps.php';
     }
 
     /**
@@ -42,11 +55,20 @@ class HoytCreativeApps
      */
     public function init()
     {
-        // TODO: Add plugin initialization logic
-        // - Register custom post types
-        // - Register custom fields
-        // - Enqueue assets
-        // - Set up admin menus
+        // Plugin is now initialized through included files
+        // Post types and taxonomies are registered automatically
+    }
+
+    /**
+     * Load plugin textdomain
+     */
+    public function load_textdomain()
+    {
+        load_plugin_textdomain(
+            'hoytcreative-apps',
+            false,
+            dirname(plugin_basename(__FILE__)) . '/languages/'
+        );
     }
 
     /**
